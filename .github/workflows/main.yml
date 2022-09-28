@@ -12,15 +12,15 @@ jobs:
       id: container-scan
       continue-on-error: true
       with:
-        image-name: ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.ACR_REPOSITORY_NAME }}:${{ github.sha }}
+        image-name: azsecacr.azurecr.io/devsecops01:${{ github.sha }}
     
     - uses: Azure/docker-login@v1
       with:
-        login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+        login-server: azsecacr.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
-    - run: docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ secrets.ACR_REPOSITORY_NAME }}:${{ github.sha }}       
+    - run: docker push azsecacr.azurecr.io/devsecops01:${{ github.sha }}       
 
     - name: Post logs to appinsights
       uses: Azure/publish-security-assessments@v0
