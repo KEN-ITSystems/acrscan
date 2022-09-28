@@ -13,8 +13,8 @@ jobs:
       continue-on-error: true
       with:
         image-name: azsecacr.azurecr.io/devsecops01:${{ github.sha }}
-        severity-threshold: CRITICAL
-        run-quality-checks: true
+        #severity-threshold: CRITICAL
+        #run-quality-checks: true
         
     - uses: Azure/docker-login@v1
       with:
