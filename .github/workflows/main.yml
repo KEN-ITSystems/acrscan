@@ -13,7 +13,9 @@ jobs:
       continue-on-error: true
       with:
         image-name: azsecacr.azurecr.io/devsecops01:${{ github.sha }}
-    
+        severity-threshold: CRITICAL
+        run-quality-checks: true
+        
     - uses: Azure/docker-login@v1
       with:
         login-server: azsecacr.azurecr.io
@@ -28,3 +30,9 @@ jobs:
         scan-results-path: ${{ steps.container-scan.outputs.scan-report-path }}
         connection-string: ${{ secrets.AZ_APPINSIGHTS_CONNECTION_STRING }}
         subscription-token: ${{ secrets.AZ_SUBSCRIPTION_TOKEN }}
+
+#uses: Azure/container-scan@v0
+#      with:
+#        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic:${{ github.run_number }}
+#        severity-threshold: CRITICAL
+#        run-quality-checks: true
